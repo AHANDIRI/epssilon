@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de fichier - MVP</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: sans-serif; margin: 40px; }
+        .form-container { border: 1px solid #ccc; padding: 20px; max-width: 400px; }
+        input[type="submit"] { margin-top: 15px; padding: 5px 15px; }
+    </style>
+</head>
+<body>
+
+    <h1>Envoyer un document</h1>
+    
+    <div class="form-container">
+        <form action="upload.php" method="POST" enctype="multipart/form-data">
+            
+            <label for="monFichier">Sélectionnez un fichier :</label><br><br>
+            
+            <input type="file" name="monFichier" id="monFichier" required>
+            
+            <br>
+            
+            <input type="submit" value="Envoyer" name="submit">
+            
+        </form>
+    </div>
+
+</body>
+</html>
