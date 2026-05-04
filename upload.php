@@ -1,42 +1,27 @@
 <?php
-$dossier_destination = "uploads/";
-
-if (!is_dir($dossier_destination)) {
-    mkdir($dossier_destination, 0777, true);
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["monFichier"])) {
-
+if (isset($_FILES['mon_fichier']) && $_FILES['mon_fichier']['error'] == 0) {
     
-    if ($_FILES["monFichier"]["error"] !== 0) {
-    echo "<p style='color:red;'>Code d'erreur PHP : " . $_FILES["monFichier"]["error"] . "</p>";
-}
-    $fichier = $_FILES["monFichier"];
-    $nom_fichier = basename($fichier["name"]);
-    $chemin_cible = $dossier_destination . $nom_fichier;
-    $extension_fichier = strtolower(pathinfo($chemin_cible, PATHINFO_EXTENSION));
-    
-    $uploadOk = true;
+    $nomFichier = $_FILES['mon_fichier']['name'];
+    $tempFichier = $_FILES['mon_fichier']['tmp_name'];
 
-    $formats_autorises = array("pdf", "txt");
-    
-    if (!in_array($extension_fichier, $formats_autorises)) {
-        echo "<p style='color:red;'>Erreur : Seuls les fichiers PDF et TXT sont autorisés.</p>";
-        $uploadOk = false;
-    }
+    $extensionsAutorisees = ['pdf', 'jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp' , 'doc', 'docx'];
+    $infosFichier = pathinfo($nomFichier);
+    $extensionExtraction = strtolower($infosFichier['extension']);
 
-    if ($uploadOk) {
-        if (move_uploaded_file($fichier["tmp_name"], $chemin_cible)) {
-            echo "<p style='color:green;'>Succès ! Le fichier <strong>" . htmlspecialchars($nom_fichier) . "</strong> a bien été déposé sur le serveur.</p>";
-        } else {
-            echo "<p style='color:red;'>Erreur : Un problème est survenu lors du dépôt du fichier.</p>";
-        }
+    if (in_array($extensionExtraction, $extensionsAutorisees)) {
+        
+        $dossierCible = 'uploads/' . basename($nomFichier);
+
+        move_uploaded_file($tempFichier, $dossierCible);
+        echo "Succès ! Le fichier <strong>$nomFichier</strong> a été téléchargé.";
+       
+    } else {
+        echo "Erreur : Seuls les fichiers PDF, images et documents sont autorisés (JPG, PNG, GIF, WEBP, BMP, DOC, DOCX).";
     }
 
 } else {
-    echo "<p>Aucun fichier n'a été reçu.</p>";
+    echo "Erreur : Aucun fichier sélectionné ou erreur lors de l'envoi.";
 }
-?>
 
-<br>
-<a href="index.html">Retour au formulaire</a>
+echo '<br><a href="upload_page.php">Retour au formulaire</a>';
+?>

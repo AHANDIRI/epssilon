@@ -1,1 +1,60 @@
-# epssilon
+# Epsilon - Gestion d'uploads (PHP)
+
+Application web PHP simple pour envoyer des fichiers (PDF et images) vers un dossier local `uploads/`.
+
+## Fonctionnalités
+
+- Page d'accueil avec navigation
+- Formulaire d'upload de fichier
+- Vérification de l'extension du fichier
+- Enregistrement dans le dossier `uploads/`
+- Message de succès ou d'erreur après envoi
+
+## Structure du projet
+
+- `index.php` : page d'accueil
+- `upload_page.php` : formulaire d'envoi
+- `upload.php` : traitement de l'upload côté serveur
+- `header.php` / `footer.php` : layout commun
+- `style.css` : styles principaux
+- `uploads/` : dossier de destination des fichiers
+
+## Types de fichiers autorisés
+
+- `pdf`
+- `jpg`, `jpeg`
+- `png`
+- `gif`
+- `webp`
+- `bmp`
+
+## Prérequis
+
+- PHP 7.4+ (ou version supérieure)
+- Serveur local (WAMP, XAMPP, Laragon, etc.)
+
+## Installation et lancement (WAMP)
+
+1. Place le projet dans le dossier web local (ex : `C:/wamp64/www/SN2/Epsilon`).
+2. Vérifie que le dossier `uploads/` existe et est accessible en écriture.
+3. Démarre Apache depuis WAMP.
+4. Ouvre l'URL du projet dans le navigateur :
+   - `http://localhost/SN2/Epsilon/`
+
+## Utilisation
+
+1. Ouvre la page **Uploader un fichier** depuis le menu.
+2. Sélectionne un fichier autorisé.
+3. Clique sur **Envoyer**.
+4. Consulte le message de résultat.
+
+## Points d'amélioration possibles
+
+- Renommer les fichiers à l'upload pour éviter les collisions
+- Ajouter une limite de taille de fichier
+- Vérifier le type MIME en plus de l'extension
+- Afficher la liste des fichiers déjà envoyés
+
+## Auteur
+
+Evan Deveer
